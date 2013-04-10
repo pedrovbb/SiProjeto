@@ -1,4 +1,4 @@
-~~~~~~ SiProjeto ~~~~~~
+                       ~~~~~~ SiProjeto v3.0 ~~~~~~
 
 Projeto de SI1 UFCG 2013
 Desenvolvedores:
@@ -7,25 +7,25 @@ Desenvolvedores:
    - Priscylla Kelly
    - Rennan Henrique
 
-#===============================================================
-#N√ÉO EDENTEM O C√ìDIGO AUTOMATICAMENTE!!!
-#===============================================================
-ELE J√Å EST√Å EDENTADO MANUALMENTE PARA FACILITAR A LEITURA!!!
+#================================================
+#N√O EDENTEM O C”DIGO AUTOMATICAMENTE!!!
+#================================================
+ELE J¡ EST¡ EDENTADO MANUALMENTE PARA FACILITAR A LEITURA!!!
 
-T√° com tempo livre? √ìtimo!
-  - Sempre refatore o c√≥digo, deixando assim mais leg√≠vel
-  - Acrescente javadoc na maioria dos m√©todos para melhorar o entendimento
-  - Observe as linhas que est√£o marcadas com //TODO, pois merecem aten√ß√£o, seja por d√∫vida ou por faltar de fazer
+T· com tempo livre? ”timo!
+  - Sempre refatore o cÛdigo, deixando assim mais legÌvel
+  - Acrescente javadoc na maioria dos mÈtodos para melhorar o entendimento
+  - Observe as linhas que est„o marcadas com //TODO, pois merecem atenÁ„o, seja por d˙vida ou por faltar de fazer
 
 
 Links Importantes:
-  - Doc com especifica√ß√µes ~> http://goo.gl/YiY9X
-  - Testes de aceita√ß√£o ~> http://goo.gl/D3Zal
+  - Doc com especificaÁıes ~> http://goo.gl/YiY9X
+  - Testes de aceitaÁ„o ~> http://goo.gl/D3Zal
   - Ajuda com o git ~> https://www.youtube.com/watch?v=l2Xfxx9MI4o
-  - Plugin UML com tutorial simples e r√°pido de instala√ß√£o: http://www.objectaid.com/installation
+  - Plugin UML com tutorial simples e r·pido de instalaÁ„o: http://www.objectaid.com/installation
 
-Vamos l√° galera!!!
+Vamos l· galera!!!
 
 @OffTopic
 #Caso ainda esteja ocorrendo erros ao puxar do gitHub, me avisem!
-Qualquer d√∫vida perguntem no grupo.
+Qualquer d˙vida perguntem no grupo.

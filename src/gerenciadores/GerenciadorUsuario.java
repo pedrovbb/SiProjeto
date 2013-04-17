@@ -1,5 +1,6 @@
 package gerenciadores;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,8 +24,9 @@ import exception.UsuarioInexistenteException;
 import outrasClases.ID;
 import outrasClases.Usuario;
 
-public class GerenciadorUsuario {
+public class GerenciadorUsuario implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	// <idUsuario | objUsuario >
 	private Map<ID, Usuario> usuarioCadastrados;
 
@@ -51,9 +53,12 @@ public class GerenciadorUsuario {
 	 */
 	public void criarUsuario(String login, String senha, String nome, String email) 
 			throws CamposException, CadastraException {
+		System.out.println("a");
 		verificaExcecoes(login, email, senha, nome);
+		System.out.println("b");
 		verificaExistancia(login, email);
 		Usuario usuario = new Usuario(login, senha, nome, email);
+		System.out.println("c");
 		usuarioCadastrados.put(usuario.getID(), usuario);
 	}
 

@@ -1,7 +1,10 @@
 package outrasClases;
 
-public class Sessao {
+import java.io.Serializable;
 
+public class Sessao implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private ID Id_DonoDaSessao, id_Sessao;
 
 	public Sessao(ID usuario, ID sessao) {

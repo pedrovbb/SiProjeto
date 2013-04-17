@@ -1,5 +1,6 @@
 package gerenciadores;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,8 +11,9 @@ import exception.SessaoInvalidaException;
 import outrasClases.ID;
 import outrasClases.Sessao;
 
-public class GerenciadorSessao {
+public class GerenciadorSessao implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private List<Sessao> sessoesAbertas;
 
 	public GerenciadorSessao() {
@@ -31,7 +33,7 @@ public class GerenciadorSessao {
 		verificaExcecoes(idSessaoRecebida);
 		ID ID_Sessao;
 		if (idSessaoRecebida instanceof String)
-			ID_Sessao = new ID(Long.parseLong((String) idSessaoRecebida));
+			ID_Sessao = new ID((String) idSessaoRecebida);
 		else
 			ID_Sessao = (ID) idSessaoRecebida;
 
@@ -89,7 +91,7 @@ public class GerenciadorSessao {
 				throw new SessaoInexistenteException();
 			}
 			
-			if ((searchSessao(new ID(Long.parseLong((String) idSessaoRecebida)))) == null) {
+			if ((searchSessao(new ID((String) idSessaoRecebida))) == null) {
 				throw new SessaoInexistenteException();
 			}
 		}

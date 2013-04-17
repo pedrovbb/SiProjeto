@@ -1,30 +1,33 @@
 package outrasClases;
 
-public class ID {
+import java.io.Serializable;
 
-	private long id;
+public class ID implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	private String id;
 
 	public ID() {
 		this.id = Util_ID.generateId();
 	}
 
-	public ID(long newID) {
+	public ID(String newID) {
 		this.id = newID;
 	}
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof ID)
-			return ((ID) obj).getId() == id;
+			return ((ID) obj).getId().equalsIgnoreCase(id);
 		return false;
 	}
 
 	@Override
 	public String toString() {
-		return id + "";
+		return id.trim();
 	}
 }

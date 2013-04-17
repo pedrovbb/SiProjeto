@@ -1,10 +1,12 @@
 package outrasClases;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario {
+public class Usuario implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String login, senha, nome, email;
 	private ID id;
 	private List<ID> perfilMusical, seguidores, fontesDeSons, sonsFavoritos;

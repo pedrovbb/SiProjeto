@@ -1,5 +1,6 @@
 package principal;
 
+import java.io.Serializable;
 import java.util.List;
 
 import outrasClases.ID;
@@ -20,8 +21,9 @@ import gerenciadores.GerenciadorSessao;
 import gerenciadores.GerenciadorSons;
 import gerenciadores.GerenciadorUsuario;
 
-public class Sistema {
+public class Sistema implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private GerenciadorUsuario gerenciadorUsuario;
 	private GerenciadorSons gerenciadorSons;
 	private GerenciadorSessao gerenciadorSessao;
@@ -126,7 +128,7 @@ public class Sistema {
 	public String postarSom(String idSessaoStr, String link, String dataCriacao) 
 			throws PostException, SessaoException, CamposException {
 		//TODO de quem é a responsábilidade de criar ID?
-		ID idsessao = new ID((Long.parseLong(idSessaoStr)));
+		ID idsessao = new ID(idSessaoStr);
 		gerenciadorSessao.verificaID(idsessao);
 		ID idUserDaSessao = gerenciadorSessao.getUsuario(idsessao);
 		ID idSom = gerenciadorSons.criarSom(idsessao, link, dataCriacao);

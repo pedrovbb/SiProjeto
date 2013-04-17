@@ -1,5 +1,6 @@
 package gerenciadores;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,8 +20,9 @@ import exception.PostSomInvalidException;
 import outrasClases.ID;
 import outrasClases.Som;
 
-public class GerenciadorSons {
-	
+public class GerenciadorSons implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	// <idSom | objSom >
 	private Map<ID, Som> sonsCadastrados;
 	
@@ -58,7 +60,7 @@ public class GerenciadorSons {
 	public String getAtributoSom(String idSom, String atributo)
 			throws AtributoException, PostException {
 		verificaId(idSom);
-		ID ID_Som = new ID((Long.parseLong(idSom)));
+		ID ID_Som = new ID(idSom);
 		verificaAtributo(atributo);
 		// tentei o get de Map, mas nao funcionou
 		Som som = search(ID_Som);
@@ -85,7 +87,7 @@ public class GerenciadorSons {
 	public ID getID_Som(String idString) throws PostSomInvalidException,
 			PostSomInexistenteException {
 		verificaId(idString);
-		ID ID_Som = new ID(Long.parseLong(idString));
+		ID ID_Som = new ID(idString);
 		if (search(ID_Som) != null) {
 			return ID_Som;
 		}

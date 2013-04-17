@@ -1,7 +1,10 @@
 package outrasClases;
 
-public class Som {
+import java.io.Serializable;
 
+public class Som implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private ID ID_sessao, ID_Som;
 	private String link;
 	private String dataCriacao;

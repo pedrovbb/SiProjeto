@@ -47,7 +47,7 @@ public class FacadeEasy {
 	}
 
 	public String getPerfilMusical(String idSessao) throws SessaoException{
-		return converte(sistema.getPerfilMusical(new ID(Long.parseLong(idSessao))));
+		return converte(sistema.getPerfilMusical(new ID(idSessao)));
 	}
 	
 	public String postarSom(String idSessao, String link, String dataCriacao) 

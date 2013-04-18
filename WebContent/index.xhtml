@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<title><ui:insert name="title">Programar com fé eu vou, que a fé não costuma falhar...</ui:insert></title>
+</h:head>
+
+<body>
+	<div id="containerTitulo"> Web RadiON </div>
+	<!-- tracinho -->
+	<hr width="100%" noshade="noshade" />
+
+	<p:accordionPanel>
+		<p:tab title="Logar...">
+			<h:form id="formLogin">
+				<h:panelGrid columns="2" cellpadding="10">
+					<h:outputText id="loginText" value="Login:" style="font-weight:bold" />
+					<p:inputText id="login1" label="Login" value="#{loginCadastroMB.campoLogin}" 
+						required="true"	requiredMessage="Campo login é obrigatório!" />
+
+					<h:outputText id="senhaText" value="Senha:" style="font-weight:bold" />
+					<p:password id="senha1" label="Senha" value="#{loginCadastroMB.campoSenha}" 
+						required="true" requiredMessage="Campo senha é obrigatório!" />
+				</h:panelGrid>
+				<h:messages id="msgErro1" style="color: red" update="formLogin" />
+				<p:commandButton id="botaoLogin" value="Entrar"	action="#{loginCadastroMB.doEfetuarLogin}" ajax="false"/>
+			</h:form>
+		</p:tab>
+		<p:tab title="Criar conta...">
+			<h:form id="formCadastro">
+				<h:panelGrid columns="2" cellpadding="10">
+					<h:outputText id="loginText" value="Login:"	style="font-weight:bold" />
+					<p:inputText id="login2" label="Login" value="#{loginCadastroMB.campoLogin}" required="true" />
+
+					<h:outputText id="senhaText" value="Senha:" style="font-weight:bold" />
+					<p:password id="password2" label="Senha"	value="#{loginCadastroMB.campoSenha}" required="true" />
+
+					<h:outputText id="nomeText" value="Nome:" style="font-weight:bold" />
+					<p:inputText id="name2" label="Nome" value="#{loginCadastroMB.campoNome}" required="true" />
+
+					<h:outputText id="emailText" value="Email:" style="font-weight:bold" />
+					<p:inputText id="email2" label="Email" value="#{loginCadastroMB.campoEmail}" required="true" />
+				</h:panelGrid>
+				<h:messages id="msgErro2" style="color: red" update="formCadastro" />
+				<h:commandButton id="botaoCadastrar" value="Cadastrar" action="#{loginCadastroMB.efetuarCadastro()}" ajax="false"/>
+			</h:form>
+		</p:tab>
+	</p:accordionPanel>
+
+	<!-- tracinho -->
+	<hr width="100%" noshade="noshade" />
+	<div id="rodape">Copyright © Web RadiON 2013</div>
+</body>
+</html>

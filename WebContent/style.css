@@ -1,0 +1,26 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	background-color: #F8F8FF;
+}
+
+#containerTitulo {
+	text-align: center;
+	color: #0099FF;
+	font-style: italic;
+	font-size: 55px;
+	background-color: #E0FFFF;
+}
+
+#containerImagemPerfil{
+	text-align: center;
+}
+
+#rodape {
+	color: #0099FF;
+	font-style: italic;
+	background-color: #E0FFFF;
+	position: absolute;
+	bottom: 1px
+}
+

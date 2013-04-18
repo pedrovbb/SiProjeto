@@ -3,9 +3,11 @@ package gerenciadores;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -42,7 +44,11 @@ public class GerenciadorSons implements Serializable {
 	public ID criarSom(ID idSessao, String link, String dataCriacao)
 			throws PostException {
 		verificaLink(link);
-		verificaData(dataCriacao);
+		try {
+			verificaData(dataCriacao);	
+		} catch (Exception e) {
+			throw new PostDateException();
+		}
 		Som som = new Som(idSessao, link, dataCriacao);
 		sonsCadastrados.put(som.getID_Som(), som);
 		return som.getID_Som();
@@ -73,7 +79,7 @@ public class GerenciadorSons implements Serializable {
 	
 	// TODO apenas para testes
 	public int getNumeroDeSons() {
-	return	sonsCadastrados.size();
+		return sonsCadastrados.size();
 	}
 	
 	/**
@@ -93,6 +99,17 @@ public class GerenciadorSons implements Serializable {
 		}
 		throw new PostSomInexistenteException();
 	}
+	
+	public List<Som> getSons(List<ID> sonsParaPegar){
+		List<Som> sons = new ArrayList<Som>();
+		Iterator<ID> it = sonsParaPegar.iterator();
+		while (it.hasNext()) {
+			ID id = (ID) it.next();
+			sons.add(search(id));
+		}
+		return sons;
+	}
+	
 	
 	//----------------------- AUXILIARES -----------------------
 	
@@ -114,6 +131,7 @@ public class GerenciadorSons implements Serializable {
 	 * @param data
 	 * @throws PostException
 	 */
+	@SuppressWarnings("deprecation")
 	private void verificaData(String data) 
 			throws PostException {
 		if (data == null || data.trim().isEmpty()) {
@@ -122,15 +140,18 @@ public class GerenciadorSons implements Serializable {
 		SimpleDateFormat converte = new SimpleDateFormat("dd/MM/yyy");
 		converte.setLenient(false);
 		Date dataRecebida;
+		Date dataAtual = new Date();
 		try {
 			// se passar por aqui, eh do tipo dd/mm/yyyy
 			dataRecebida = converte.parse(data);
+			dataRecebida.setHours(dataAtual.getHours());
+			dataRecebida.setMinutes(dataAtual.getMinutes());
+			dataRecebida.setSeconds(dataAtual.getSeconds()+1);
 		} catch (ParseException e) {
 			throw new PostDateException();
 		} catch (Exception e) {
 			throw new PostException("Erro desconhecido ao receber data");
 		}
-		Date dataAtual = new Date();
 		if (dataRecebida.before(dataAtual)) {
 			throw new PostDateException();
 		}

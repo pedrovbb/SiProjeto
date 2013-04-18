@@ -12,7 +12,7 @@ public class mainEasy {
 		files.add("testes/US02.txt");
 		files.add("testes/US03.txt");
 		files.add("testes/US04.txt");
-		files.add("testes/US05.txt");
+//		files.add("testes/US05.txt");
 //		files.add("testes/US06.txt");
 //		files.add("testes/US07.txt");
 		FacadeEasy facade = new FacadeEasy();

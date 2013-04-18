@@ -16,7 +16,7 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 		this.nome = nome;
 		this.email = email;
-		this.id = new ID();
+		this.id = new ID("user");
 		this.perfilMusical = new ArrayList<ID>();
 		this.seguidores = new ArrayList<ID>();
 		this.fontesDeSons = new ArrayList<ID>();
@@ -72,7 +72,7 @@ public class Usuario implements Serializable {
 			condicao3 = ((Usuario) obj).getEmail().equals(this.getEmail());
 			condicao4 = ((Usuario) obj).getSenha().equals(this.getSenha());
 			condicao5 = ((Usuario) obj).getID().equals(this.getID());
-			return (condicao1 == condicao2 == condicao3 == condicao4 == condicao5);
+			return (condicao1 && condicao2 && condicao3 && condicao4 && condicao5);
 		}
 		return false;
 	}

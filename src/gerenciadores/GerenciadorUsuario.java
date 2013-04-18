@@ -53,12 +53,9 @@ public class GerenciadorUsuario implements Serializable {
 	 */
 	public void criarUsuario(String login, String senha, String nome, String email) 
 			throws CamposException, CadastraException {
-		System.out.println("a");
 		verificaExcecoes(login, email, senha, nome);
-		System.out.println("b");
 		verificaExistancia(login, email);
 		Usuario usuario = new Usuario(login, senha, nome, email);
-		System.out.println("c");
 		usuarioCadastrados.put(usuario.getID(), usuario);
 	}
 

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import outrasClases.ID;
+import outrasClases.Som;
 import exception.AtributoException;
 import exception.CadastraException;
 import exception.CampoLoginException;
@@ -107,9 +108,13 @@ public class Sistema implements Serializable {
 	 * @return lista de IDs de sons
 	 * @throws SessaoException
 	 */
-	public List<ID> getPerfilMusical(ID idSessao) throws SessaoException {
-		// TODO mudar isso para que o facade não precise conhecer ID, nem Som
-		ID idUser = gerenciadorSessao.getUsuario(idSessao);
+	public List<ID> getPerfilMusical(Object idSessao) throws SessaoException {
+		ID sessaoID = null;
+		if(idSessao instanceof String)
+			sessaoID = new ID((String) idSessao);
+		else
+			sessaoID = (ID) idSessao;
+		ID idUser = gerenciadorSessao.getUsuario(sessaoID);
 		// TODO testar se idUser nunca será null
 		return gerenciadorUsuario.getPerfilMusical(idUser);
 	}
@@ -244,6 +249,10 @@ public class Sistema implements Serializable {
 		ID ID_User = gerenciadorSessao.getUsuario(idSessao);
 		ID ID_Som = gerenciadorSons.getID_Som(idSom);
 		gerenciadorUsuario.favoritarSom(ID_User, ID_Som);
+	}
+
+	public List<Som> getSonsPostados(List<ID> idSons) {
+		return gerenciadorSons.getSons(idSons);
 	}
 	
 	// ------------------- US04 --------------------

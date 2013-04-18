@@ -13,7 +13,7 @@ public class Som implements Serializable {
 		this.ID_sessao = sessao;
 		this.link = link;
 		this.dataCriacao = dataCriacao;
-		this.ID_Som = new ID();
+		this.ID_Som = new ID("som");
 	}
 
 	public ID getID_sessao() {
@@ -32,10 +32,15 @@ public class Som implements Serializable {
 		return toString;
 	}
 
+	@Override
+	public String toString() {
+		return link;
+	}
+
 	public ID getID_Som() {
 		return ID_Som;
 	}
-	
+
 	public String getDataCriacao() {
 		return dataCriacao;
 	}

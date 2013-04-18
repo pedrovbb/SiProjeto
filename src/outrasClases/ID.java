@@ -12,7 +12,11 @@ public class ID implements Serializable {
 	}
 
 	public ID(String newID) {
-		this.id = newID;
+		// TODO gambiarraaaa!
+		if (newID.trim().length() <= 10)
+			this.id = Util_ID.generateIdManual();
+		else
+			this.id = newID;
 	}
 
 	public String getId() {

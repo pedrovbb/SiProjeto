@@ -1,7 +1,11 @@
 @CHARSET "ISO-8859-1";
 
-body {
+html,body {
+	margin: 0;
+	padding: 0;
 	background-color: #F8F8FF;
+	height: 125%;
+	margin: 0;
 }
 
 #containerTitulo {
@@ -10,17 +14,45 @@ body {
 	font-style: italic;
 	font-size: 55px;
 	background-color: #E0FFFF;
+	border-style: double;
 }
 
-#containerImagemPerfil{
-	text-align: center;
+#containerTudo {
+	height: 100%;
 }
 
-#rodape {
+#containerLoginCadastro {
+}
+
+#containerFeedPrincipal {
+	margin: 0% 0% 0% 1%;
+	float: left;
+	width: 70%;
+}
+
+#containerFeedExtra {
+	border-style: ridge;
+	float: right;
+	width: 28%;
+	height: 44%;
+}
+
+#containerAmigos {
+	border-style: ridge;
+	position: relative;
+	height: 34%;
+	margin: 36% 0% 0% 1%;
+	height: 34%;
+}
+
+#containerRodape {
 	color: #0099FF;
+	font-weight: bold;
 	font-style: italic;
 	background-color: #E0FFFF;
+	border-style: double;
 	position: absolute;
-	bottom: 1px
+	top: 153%;
+	height: 3%;
+	width: 99%;
 }
-

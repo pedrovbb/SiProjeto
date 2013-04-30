@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<project name="SiProjeto" default="run" basedir=".">
+	<description>
+		Projeto usando Ant para automação de processos
+	</description>
+	<property name="NOME_PROJETO" value="${ant.project.name}" />
+	<property name="URL" value="http://localhost:8080/${NOME_PROJETO}" />
+	<property name="WARFILE" value="dist/${NOME_PROJETO}.war" />
+	<property name="FONTES" location="src" />
+	<property name="BINARIOS" location="build" />
+	<property name="DOC" location="doc" />
+	<property name="DIST" location="dist" />
+	<property name="JBOSS_HOME" location="D:\jboss-as-7.1.1.Final" />
+
+	<target name="limpa" description="Faz uma limpeza do projeto">
+		<echo> Apagando arquivos desnecessarios... </echo>
+		<delete dir="${DIST}" />
+		<delete dir="${BINARIOS}" />
+		<delete dir="${DOC}" />
+		<delete>
+			<fileset includes="*.war" dir="${JBOSS_HOME}\standalone\deployments" />
+			<fileset includes="*.war.*" dir="${JBOSS_HOME}\standalone\deployments" />
+		</delete>
+		<delete dir="${JBOSS_HOME}\standalone\deployments\${NOME_PROJETO}.war" />
+		<echo> Limpeza concluida! </echo>
+	</target>
+
+	<target name="prepara" description="Recria os diretorios" depends="limpa">
+		<echo> Recriando os diretorios... </echo>
+		<mkdir dir="${DIST}" />
+		<mkdir dir="${BINARIOS}/classes" />
+		<mkdir dir="${DOC}" />
+		<echo> Diretorios criados! </echo>
+	</target>
+
+	<path id="classpath.base">
+		<fileset dir="WebContent/WEB-INF/lib">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="compila" depends="prepara">
+		<echo> Compilando os arquivos... </echo>
+		<javac srcdir="${FONTES}" destdir="${BINARIOS}/classes" includeantruntime="false">
+			<classpath refid="classpath.base" />
+		</javac>
+		<echo> Compilacao concluida! </echo>
+	</target>
+
+	<target name="javadoc" depends="prepara" description="Gera documentacao">
+		<echo> Gerando documentacao (javadoc) </echo>
+		<javadoc sourcepath="${FONTES}" destdir="${DOC}">
+			<classpath refid="classpath.base" />
+		</javadoc>
+		<echo> Javadoc gerado! </echo>
+	</target>
+
+	<target name="stopServer">
+		<echo> ********** IMPORTANTE!!!  Edite a variavel JBOSS_HOME do build para o caminho do seu jBoss ************ </echo>
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="${JBOSS_HOME}/bin/jboss-cli.bat --connect --command=:shutdown" />
+		</exec>
+	</target>
+
+	<target name="war" depends="compila">
+		<echo>Gerando arquivo WAR...</echo>
+		<war warfile="${WARFILE}" webxml="WebContent/WEB-INF/web.xml">
+			<fileset dir="WebContent">
+				<include name="*.xhtml" />
+				<include name="*.css" />
+			</fileset>
+			<classes dir="${BINARIOS}/classes" />
+			<lib dir="WebContent/WEB-INF/lib" />
+			<webinf dir="WebContent/WEB-INF">
+				<include name="web.xml" />
+			</webinf>
+		</war>
+		<echo>Arquivo WAR gerado!</echo>
+	</target>
+
+	<target name="deploy" depends="war">
+		<copy todir="${JBOSS_HOME}\standalone\deployments" file="dist/${NOME_PROJETO}.war" />
+	</target>
+
+	<target name="startServer" depends="stopServer, limpa, deploy, javadoc">
+		<echo> Iniciando servidor... </echo>
+		<exec executable="cmd" spawn="true">
+			<arg value="/c" />
+			<arg value="${JBOSS_HOME}/bin/standalone.bat" />
+		</exec>
+		<sleep seconds="5"/>
+		<echo> Servidor ON! </echo>
+	</target>
+
+	<target name="run" depends="startServer">
+		<echo> Executando no servidor... </echo>
+		<waitfor maxwait="30" maxwaitunit="second" checkevery="500">
+			<http url="${URL}" />
+		</waitfor>
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="start ${URL}" />
+		</exec>
+		<echo> Execucao concluida! </echo>
+	</target>
+
+</project>

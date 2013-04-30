@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,6 +21,7 @@ import exception.PostSomInexistenteException;
 import exception.PostSomInvalidException;
 
 import outrasClases.ID;
+import outrasClases.Rule;
 import outrasClases.Som;
 
 public class GerenciadorSons implements Serializable {
@@ -110,6 +112,17 @@ public class GerenciadorSons implements Serializable {
 		return sons;
 	}
 	
+	public List<ID> getMainFeed(List<ID> sonsDasFontes, Rule rule) {
+		List<Som> feed = getSons(sonsDasFontes);
+		Collections.sort(feed, rule);
+		return getIdSons(feed);
+	}
+	
+
+	public void acrescentaFavoritos(ID idUser, ID idSom) {
+		search(idSom).incrementaFavorito(idUser);
+		//sonsCadastrados.get(idSom).incrementaFavorito();
+	}
 	
 	//----------------------- AUXILIARES -----------------------
 	
@@ -202,5 +215,15 @@ public class GerenciadorSons implements Serializable {
 			}
 		}
 		return null;
+	}
+	
+	private List<ID> getIdSons(List<Som> sonsParaPegar){
+		List<ID> sons = new ArrayList<ID>();
+		Iterator<Som> it = sonsParaPegar.iterator();
+		while (it.hasNext()) {
+			Som id = (Som) it.next();
+			sons.add(id.getID_Som());
+		}
+		return sons;
 	}
 }

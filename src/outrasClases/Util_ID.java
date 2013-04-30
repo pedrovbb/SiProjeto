@@ -1,6 +1,5 @@
 package outrasClases;
 
-import java.util.Date;
 import java.util.Random;
 
 import javax.faces.context.FacesContext;
@@ -15,7 +14,7 @@ public abstract class Util_ID {
 	protected static String generateId() {
 		String idGerado = getCurrentID_SessionJSF();
 		if(idGerado == null){
-			idGerado = String.valueOf(new Date().getTime() * new Random().nextLong());
+			idGerado = String.valueOf(System.currentTimeMillis() * new Random().nextLong());
 		}
 		return idGerado;
 	}
@@ -31,6 +30,6 @@ public abstract class Util_ID {
 	
 	//TODO gambiarra mesmo
 	protected static String generateIdManual() {
-		return String.valueOf(new Date().getTime() * new Random().nextLong());
+		return String.valueOf(System.currentTimeMillis() * new Random().nextLong());
 	}
 }

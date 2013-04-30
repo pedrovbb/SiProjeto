@@ -14,7 +14,11 @@ import exception.LoginException;
 import exception.LoginInexistenteException;
 import exception.PostException;
 import exception.PostSomInvalidException;
+import exception.RegraDeComposicaoInexistente;
+import exception.RegraDeComposicaoInvalida;
 import exception.SessaoException;
+import exception.SessaoInexistenteException;
+import exception.SessaoInvalidaException;
 import exception.UsuarioInexistenteException;
 import principal.Sistema;
 
@@ -106,7 +110,25 @@ public class FacadeEasy {
 	public void favoritarSom(String idSessao, String idSom) throws PostException, SessaoException{
 		sistema.favoritarSom(idSessao, idSom);
 	}
+//-----------------US5-------------------/
+	public String getFirstCompositionRule(){
+		return "PRIMEIRO OS SONS POSTADOS MAIS RECENTEMENTE PELAS FONTES DE SONS";
+	}
+	public String getSecondCompositionRule(){
+		return "PRIMEIRO OS SONS COM MAIS FAVORITOS";
+	}
 	
+	public String getThirdCompositionRule(){
+		return "PRIMEIRO SONS DE FONTES DAS QUAIS FAVORITEI SONS NO PASSADO";
+	}
+	public String getMainFeed(String idSessao) throws SessaoInvalidaException, SessaoInexistenteException{
+		return converte(sistema.getMainFeed(idSessao));
+	}
+	
+	public void setMainFeedRule(String idSessao, String regra) 
+			throws SessaoInvalidaException, SessaoInexistenteException, RegraDeComposicaoInvalida, RegraDeComposicaoInexistente {
+		sistema.setMainFeedRule(idSessao, regra);
+	}
 	
 	// ---------------- AUXILIARES ------------------
 	

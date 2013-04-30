@@ -14,6 +14,8 @@ import exception.LoginInexistenteException;
 import exception.PostException;
 import exception.PostSomInexistenteException;
 import exception.PostSomInvalidException;
+import exception.RegraDeComposicaoInexistente;
+import exception.RegraDeComposicaoInvalida;
 import exception.SessaoException;
 import exception.SessaoInexistenteException;
 import exception.SessaoInvalidaException;
@@ -248,12 +250,24 @@ public class Sistema implements Serializable {
 			throws SessaoInvalidaException, SessaoInexistenteException, PostSomInvalidException, PostSomInexistenteException {
 		ID ID_User = gerenciadorSessao.getUsuario(idSessao);
 		ID ID_Som = gerenciadorSons.getID_Som(idSom);
+		gerenciadorSons.acrescentaFavoritos(ID_User, ID_Som);
 		gerenciadorUsuario.favoritarSom(ID_User, ID_Som);
 	}
 
 	public List<Som> getSonsPostados(List<ID> idSons) {
 		return gerenciadorSons.getSons(idSons);
 	}
+//---- US 05 ---------/
+	public List<ID> getMainFeed(String idSessao)
+			throws SessaoInvalidaException, SessaoInexistenteException {
+		ID ID_User = gerenciadorSessao.getUsuario(idSessao);
+		List<ID> sonsDasFontes = gerenciadorUsuario.getMainFeedBruto(ID_User);
+		return gerenciadorSons.getMainFeed(sonsDasFontes, gerenciadorUsuario.getRegraAplicada(ID_User));
+	}
 	
-	// ------------------- US04 --------------------
+	public void setMainFeedRule(String idSessao, String regra ) 
+			throws SessaoInvalidaException, SessaoInexistenteException, RegraDeComposicaoInvalida, RegraDeComposicaoInexistente {
+		ID ID_User = gerenciadorSessao.getUsuario(idSessao);
+		gerenciadorUsuario.setRule(ID_User, regra);
+	}
 }

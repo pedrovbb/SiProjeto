@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -12,51 +13,80 @@
 </h:head>
 
 <body>
-	<div id="containerTitulo"> Web RadiON </div>
-	<!-- tracinho -->
-	<hr width="100%" noshade="noshade" />
+	<div id="containerTudo">
+		<div id="containerTitulo"> Web RadiON </div>
+		<!-- tracinho -->
+		<hr width="100%" noshade="noshade" />
 
-	<h2><u><i>Bem Vindo, você está logado!</i></u></h2>
+		<h2><u><i>Bem Vindo, você está logado!</i></u></h2>
+		
+		<div id="containerFeedPrincipal">
+			<h:form id="formPosts">
+				<p:commandButton id="logoffButton" value="Logoff" action="#{sistemaMB.reset()}"
+					style="position: absolute; top: 14%; right: 0.5%" ajax="false" icon="ui-icon-circle-close" />
+
+				<p:growl id="growl" life="10000" />
+		
+				<tr>
+					<td><p:inputText id="linkText" value="#{postarSomMB.linkSom}" size="50" /></td>
+					<p:watermark for="linkText" value="Compartilhe seu link aqui..." />
+					<td><p:commandButton value="Postar" action="#{postarSomMB.postarSom()}" update="formPosts" ajax="false"/></td>
+					<!-- 
+					<td><h:commandButton value="limpar"	action="#{somMB.incompleto()}" update="growl" /></td>
+					 <h:messages id="msgErro" style="color: red" />
+					 -->
+				</tr>
+		
+				<p/><br/> <!-- espaço em branco -->
+		
+				<p:dataTable id="dataTablePosts" var="objSom" value="#{sistemaMB.getSonsPostados()}"
+					emptyMessage="Nenhum link postado" loadingMessage="Atualizando..." style="text-align: center;"
+					scrollRows="15" scrollable="true" liveScroll="true"	scrollHeight="330">
+					<p:column headerText="Quem postou?">
+						<h:outputText value="Falta implementar" />
+					</p:column>
+		
+					<p:column headerText="Link">
+						<h:outputText value="#{objSom.link}" />
+					</p:column>
+		
+					<p:column headerText="Quando?">
+						<h:outputText value="#{objSom.dataCriacao}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</div> <!-- div feed principal -->
 	
-	<h:form id="formPosts">
-		<p:commandButton id="logoffButton" value="Logoff" action="#{loginCadastroMB.reiniciar()}" style="position: absolute; right: 0%" ajax="false" />
+		<div id="containerFeedExtra">
+			<h:form id="formFeedExtra">
+				<p:growl id="growl" life="10000" />
 
-		<p:growl id="growl" life="10000" />
+				<p:selectOneMenu value="#{SistemaBean.regra}">
+					<f:selectItem itemLabel="Selecione uma regra para a ordenação" itemValue="" />
+					<f:selectItem itemLabel="Sons recentes de suas fontes" itemValue="PRIMEIRO OS SONS POSTADOS MAIS RECENTEMENTE PELAS FONTES DE SONS" />
+					<f:selectItem itemLabel="Sons mais favoritados" itemValue="PRIMEIRO OS SONS COM MAIS FAVORITOS" />
+				</p:selectOneMenu>
 
-		<tr>
-			<td><p:inputText id="linkText" value="#{postarSomMB.linkSom}" size="50" /></td>
-			<p:watermark for="linkText" value="Compartilhe seu link aqui..." />
-			<td><p:commandButton value="Postar" action="#{postarSomMB.postarSom()}" update="formPosts"/></td>
-			<!-- 
-			<td><h:commandButton value="limpar"	action="#{somMB.incompleto()}" update="growl" /></td>
-			 <h:messages id="msgErro" style="color: red" />
-			 -->
-		</tr>
+				<p:dataTable id="dataTableFeedExtra" var="objSom"
+					value="#{sistemaMB.getSonsExtras()}"
+					emptyMessage="Nenhum link postado" loadingMessage="Atualizando..."
+					style="text-align: center;" scrollRows="15" scrollable="true"
+					liveScroll="true" scrollHeight="330">
 
-		<p></p>
+					<p:column headerText="Link">
+						<h:outputText value="#{objSom.link}" />
+					</p:column>
 
-		<p:dataTable var="objSom" value="#{sistemaMB.getSonsPostados()}"
-			scrollRows="20" scrollable="true" liveScroll="true"
-			scrollHeight="500" id="dataTablePosts"
-			emptyMessage="Nenhum link postado" loadingMessage="Atualizando..."
-			style="text-align: center;">
+				</p:dataTable>
+			</h:form>
+		</div>
 
-			<p:column headerText="Quem postou?">
-				<h:outputText value="Falta implementar" />
-			</p:column>
+		<div id="containerAmigos">
+			<label style="font-size: xx-large;">Área destinada para seguidores e quem você segue, na qual não foi implementada.</label>
+		</div>
 
-			<p:column headerText="Link">
-				<h:outputText value="#{objSom.link}" />
-			</p:column>
-
-			<p:column headerText="Quando?">
-				<h:outputText value="#{objSom.dataCriacao}" />
-			</p:column>
-		</p:dataTable>
-	</h:form>
-
-	<!-- tracinho -->
-	<hr width="99%" noshade="noshade" align="center" style="position: absolute;bottom: 20px;"/>
-	<div id="rodape">Copyright © Web RadiON 2013</div>
+		<div id="containerRodape">Copyright © Web RadiON 2013</div>
+	</div> <!-- div tudo -->
 </body>
 </html>
+<!-- icons http://jqueryui.com/themeroller/ -->

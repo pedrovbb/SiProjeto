@@ -9,8 +9,9 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String login, senha, nome, email;
 	private ID id;
+	private Rule regraUsada; 
 	private List<ID> perfilMusical, seguidores, fontesDeSons, sonsFavoritos;
-
+	
 	public Usuario(String login, String senha, String nome, String email) {
 		this.login = login;
 		this.senha = senha;
@@ -21,6 +22,7 @@ public class Usuario implements Serializable {
 		this.seguidores = new ArrayList<ID>();
 		this.fontesDeSons = new ArrayList<ID>();
 		this.sonsFavoritos = new ArrayList<ID>();
+		this.setRegraUsada(new Rule1());
 	}
 
 	public String getLogin() {
@@ -117,5 +119,14 @@ public class Usuario implements Serializable {
 	// ------------------------ US04 -----------------------
 	public void addSomFavorito(ID ID_Som) {
 		sonsFavoritos.add(0, ID_Som);
+	}
+
+	// ------------------------ US05 -----------------------
+	public Rule getRegraUsada() {
+		return regraUsada;
+	}
+
+	public void setRegraUsada(Rule regraUsada) {
+		this.regraUsada = regraUsada;
 	}
 }

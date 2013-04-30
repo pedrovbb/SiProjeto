@@ -19,9 +19,15 @@ import exception.CampoSenhaException;
 import exception.CamposException;
 import exception.LoginException;
 import exception.LoginInexistenteException;
+import exception.RegraDeComposicaoInexistente;
+import exception.RegraDeComposicaoInvalida;
 import exception.UsuarioInexistenteException;
 
 import outrasClases.ID;
+import outrasClases.Rule;
+import outrasClases.Rule1;
+import outrasClases.Rule2;
+//import outrasClases.Rule3;
 import outrasClases.Usuario;
 
 public class GerenciadorUsuario implements Serializable {
@@ -29,6 +35,7 @@ public class GerenciadorUsuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// <idUsuario | objUsuario >
 	private Map<ID, Usuario> usuarioCadastrados;
+	private Map<String, Rule> regras;
 
 	private enum Campos {
 		LOGIN, SENHA, EMAIL, NOME;
@@ -39,6 +46,10 @@ public class GerenciadorUsuario implements Serializable {
 	 */
 	public GerenciadorUsuario() {
 		usuarioCadastrados = new HashMap<ID, Usuario>();
+		regras= new HashMap<String, Rule>();
+		regras.put("PRIMEIRO OS SONS POSTADOS MAIS RECENTEMENTE PELAS FONTES DE SONS", new Rule1());
+		regras.put("PRIMEIRO OS SONS COM MAIS FAVORITOS", new Rule2());
+		//regras.put("PRIMEIRO SONS DE FONTES DAS QUAIS FAVORITEI SONS NO PASSADO", new Rule3());
 	}
 
 	/**
@@ -148,10 +159,10 @@ public class GerenciadorUsuario implements Serializable {
 	// ------------------------- US02 ---------------------------
 
 	/**
-	 * Retorna o tamanho da lista de seguidores de um deterinado User
+	 * Retorna o tamanho da lista de seguidores de um determinado User
 	 * 
-	 * @param login
-	 * @return
+	 * @param ID_UserRecebido
+	 * @return int
 	 */
 	public int getNumeroDeSeguidores(ID ID_UserRecebido) {
 		Usuario userEncontrado = searchUser2(ID_UserRecebido);
@@ -192,7 +203,7 @@ public class GerenciadorUsuario implements Serializable {
 	/**
 	 * Retorna a lista de ids users que são seguidores do usuário passado seu ID
 	 * 
-	 * @param iD_User
+	 * @param ID_User
 	 * @return List<ID>
 	 */
 	public List<ID> getSeguidores(ID ID_User) {
@@ -243,6 +254,37 @@ public class GerenciadorUsuario implements Serializable {
 		Usuario user = searchUser2(ID_quemFavorita);
 		user.addSomFavorito(somFavoritado);
 	}
+	
+	
+	// ----------------- US05 -----------------//
+	public List<ID> getMainFeedBruto(ID iD_User) {
+		Usuario user = usuarioCadastrados.get(iD_User);
+		List<ID> fontesDeSons = user.getFontesDeSons();
+		List<ID> sonsDasFontes = new ArrayList<ID>();
+		Iterator<ID> it = fontesDeSons.iterator();
+		while (it.hasNext()) {
+			ID id = (ID) it.next();
+			sonsDasFontes.addAll(searchUser2(id).getPerfilMusical());
+		}
+		return sonsDasFontes;
+	}
+	
+	public Rule getRegraAplicada(ID iD_User){
+		Usuario user = usuarioCadastrados.get(iD_User);
+		return user.getRegraUsada();
+	}
+	
+	public void setRule(ID iD_User, String regra)
+			throws RegraDeComposicaoInvalida, RegraDeComposicaoInexistente {
+		Usuario user = usuarioCadastrados.get(iD_User);
+		if (regra == null || regra.trim().isEmpty()){
+			throw new RegraDeComposicaoInvalida();}
+		Rule regraEscolhida = regras.get(regra);
+//		if (regraEscolhida == null){
+//			throw new RegraDeComposicaoInexistente();}
+		user.setRegraUsada(regraEscolhida);
+	}
+
 	
 	
 	// ------------------------- AUXILIARES --------------------------------
@@ -342,8 +384,6 @@ public class GerenciadorUsuario implements Serializable {
 		}
 		return null;
 	}
-
-
 	
 
 

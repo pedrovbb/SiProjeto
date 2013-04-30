@@ -12,49 +12,54 @@
 </h:head>
 
 <body>
-	<div id="containerTitulo"> Web RadiON </div>
-	<!-- tracinho -->
-	<hr width="100%" noshade="noshade" />
+	<div id="containerTudo">
+		<div id="containerTitulo"> Web RadiON </div>
+		<!-- tracinho -->
+		<hr width="100%" noshade="noshade" />
+	
+		<div id="containerLoginCadastro">
+			<p:accordionPanel id="panelLoginCadastro">
+				<p:tab title="Logar...">
+					<h:form id="formLogin">
+						<h:panelGrid columns="2" cellpadding="10">
+							<h:outputText id="loginText" value="Login:" style="font-weight:bold" />
+							<p:inputText id="login1" label="Login" value="#{loginCadastroMB.campoLogin}" 
+								required="true"	requiredMessage="Campo login é obrigatório!" />
+		
+							<h:outputText id="senhaText" value="Senha:" style="font-weight:bold" />
+							<p:password id="senha1" label="Senha" value="#{loginCadastroMB.campoSenha}" 
+								required="true" requiredMessage="Campo senha é obrigatório!" />
+						</h:panelGrid>
+						<h:messages id="msgErro1" style="color: red" update="formLogin" />
+						<p:commandButton id="botaoLogin" value="Entrar"	action="#{loginCadastroMB.doEfetuarLogin}" ajax="false"/>
+					</h:form>
+				</p:tab>
+				<p:tab title="Criar conta...">
+					<h:form id="formCadastro">
+						<h:panelGrid columns="2" cellpadding="10">
+							<h:outputText id="loginText" value="Login:"	style="font-weight:bold" />
+							<p:inputText id="login2" label="Login" value="#{loginCadastroMB.campoLogin}" required="true" />
+		
+							<h:outputText id="senhaText" value="Senha:" style="font-weight:bold" />
+							<p:password id="password2" label="Senha"	value="#{loginCadastroMB.campoSenha}" required="true" />
+		
+							<h:outputText id="nomeText" value="Nome:" style="font-weight:bold" />
+							<p:inputText id="name2" label="Nome" value="#{loginCadastroMB.campoNome}" required="true" />
+		
+							<h:outputText id="emailText" value="Email:" style="font-weight:bold" />
+							<p:inputText id="email2" label="Email" value="#{loginCadastroMB.campoEmail}" required="true" />
+						</h:panelGrid>
+						<h:messages id="msgErro2" style="color: red" update="formCadastro" />
+						<p:commandButton id="botaoCadastrar" value="Cadastrar" action="#{loginCadastroMB.efetuarCadastro()}" ajax="false"/>
+					</h:form>
+				</p:tab>
+			</p:accordionPanel>
+		</div> <!-- div login e cadastro -->
 
-	<p:accordionPanel>
-		<p:tab title="Logar...">
-			<h:form id="formLogin">
-				<h:panelGrid columns="2" cellpadding="10">
-					<h:outputText id="loginText" value="Login:" style="font-weight:bold" />
-					<p:inputText id="login1" label="Login" value="#{loginCadastroMB.campoLogin}" 
-						required="true"	requiredMessage="Campo login é obrigatório!" />
-
-					<h:outputText id="senhaText" value="Senha:" style="font-weight:bold" />
-					<p:password id="senha1" label="Senha" value="#{loginCadastroMB.campoSenha}" 
-						required="true" requiredMessage="Campo senha é obrigatório!" />
-				</h:panelGrid>
-				<h:messages id="msgErro1" style="color: red" update="formLogin" />
-				<p:commandButton id="botaoLogin" value="Entrar"	action="#{loginCadastroMB.doEfetuarLogin}" ajax="false"/>
-			</h:form>
-		</p:tab>
-		<p:tab title="Criar conta...">
-			<h:form id="formCadastro">
-				<h:panelGrid columns="2" cellpadding="10">
-					<h:outputText id="loginText" value="Login:"	style="font-weight:bold" />
-					<p:inputText id="login2" label="Login" value="#{loginCadastroMB.campoLogin}" required="true" />
-
-					<h:outputText id="senhaText" value="Senha:" style="font-weight:bold" />
-					<p:password id="password2" label="Senha"	value="#{loginCadastroMB.campoSenha}" required="true" />
-
-					<h:outputText id="nomeText" value="Nome:" style="font-weight:bold" />
-					<p:inputText id="name2" label="Nome" value="#{loginCadastroMB.campoNome}" required="true" />
-
-					<h:outputText id="emailText" value="Email:" style="font-weight:bold" />
-					<p:inputText id="email2" label="Email" value="#{loginCadastroMB.campoEmail}" required="true" />
-				</h:panelGrid>
-				<h:messages id="msgErro2" style="color: red" update="formCadastro" />
-				<h:commandButton id="botaoCadastrar" value="Cadastrar" action="#{loginCadastroMB.efetuarCadastro()}" ajax="false"/>
-			</h:form>
-		</p:tab>
-	</p:accordionPanel>
-
-	<!-- tracinho -->
-	<hr width="100%" noshade="noshade" />
-	<div id="rodape">Copyright © Web RadiON 2013</div>
+		<div id="containerRodape">
+			Copyright © Web RadiON 2013
+		</div>
+	</div> <!-- div tudo -->
 </body>
 </html>
+<!-- icons http://jqueryui.com/themeroller/ -->

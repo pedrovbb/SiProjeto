@@ -1,7 +1,7 @@
-                       ~~~~~~ SiProjeto v3.0 ~~~~~~
+                              ~~~~~~ SiProjeto v3.0 ~~~~~~
 
 Projeto de SI1 UFCG 2013
-Desenvolvedores:
+"Desenvolvedores" (plural? rsrsrsrs):
    - Pedro Victor
    - Barbara Cristina
    - Priscylla Kelly
@@ -29,3 +29,7 @@ Vamos lá galera!!!
 @OffTopic
 #Caso ainda esteja ocorrendo erros ao puxar do gitHub, me avisem!
 Qualquer dúvida perguntem no grupo.
+
+
+OBS.: tentei, mas pelo resultado final minha fé falhou, kkkkkkkkkkkk (se não entendeu, olhe a frase na aba do navegador ao rodar o código)
+Até que foi legal, pena que não deu certo. 
